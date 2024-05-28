@@ -1,17 +1,20 @@
-name: Hello World
-
-on: 
-  workflow_dispatch:
+name: "## developing action ##"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on:
   push:
     branches:
-      - main  
-
+      #      - main/*
+      - main/test/*
+    paths:
+      - packages/api/**/*
 jobs:
-  say_hello:
+  confirm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - run: echo "Hello World!"
-      - run: echo "${{ github.ref }}"
-      - run: echo "${{ github.sha }}"
-      - run: echo "${{ github.path }}"
-      
+      - name: request to slack
+        run: echo "${{ github.sha }}"
