@@ -3,6 +3,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 on:
+  workflow_dispatch:
   push:
     branches:
       #      - main/*
@@ -16,5 +17,9 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: request to slack
-        run: echo "${{ github.sha }}"
+      - name: Notify
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"text":"Hello, World!"}'
