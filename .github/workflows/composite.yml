@@ -6,10 +6,6 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: "デプロイ対象（`develop`/`staging`/`production`）"
-        required: true
-        default: "develop"
-      choice:
         type: choice
         required: true
         options:
