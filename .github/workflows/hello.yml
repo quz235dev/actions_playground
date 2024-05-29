@@ -18,12 +18,7 @@ jobs:
       id-token: write
     steps:
       - name: call child workflow
-        uses: ./child
-        with:
-          name: "## child ##"
-          ref: ${{ github.sha }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "./github/workflows/child.yml"
+        uses: ./.github/workflows/child.yml
 
       # - name: Notify
       #   uses: fjogeleit/http-request-action@v1
