@@ -17,8 +17,10 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: call child workflow
+      - name: call deploy workflow
         uses: ./.github/workflows/composite
+        with:
+          target: "develop"
 
       # - name: Notify
       #   uses: fjogeleit/http-request-action@v1
