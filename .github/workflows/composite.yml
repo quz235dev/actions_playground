@@ -21,7 +21,7 @@ jobs:
       id-token: write
     steps:
       - name: echo hello world
-        run: "run test!"
+        run: echo "run test!"
 
   deploy-development:
     if: startsWith(github.event.inputs.target, 'develop')
@@ -31,7 +31,7 @@ jobs:
       id-token: write
     steps:
       - name: echo hello world
-        run: "run deploy-development!"
+        run: echo "run deploy-development!"
 
   deploy-staging:
     if: startsWith(github.event.inputs.target, 'staging')
@@ -41,7 +41,7 @@ jobs:
       id-token: write
     steps:
       - name: echo hello world
-        run: "run deploy-staging!"
+        run: echo "run deploy-staging!"
 
   deploy-production:
     if: startsWith(github.event.inputs.target, 'production')
@@ -51,4 +51,4 @@ jobs:
       id-token: write
     steps:
       - name: echo hello world
-        run: "run deploy-production!"
+        run: echo "run deploy-production!"
