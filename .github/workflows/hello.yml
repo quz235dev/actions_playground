@@ -17,9 +17,17 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: Notify
-        uses: fjogeleit/http-request-action@v1
+      - name: call child workflow
+        uses: ./child
         with:
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          customHeaders: '{"Content-Type": "application/json"}'
-          data: '{"text":"Hello, World!"}'
+          name: "## child ##"
+          ref: ${{ github.sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: "child.yml"
+
+      # - name: Notify
+      #   uses: fjogeleit/http-request-action@v1
+      #   with:
+      #     url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     customHeaders: '{"Content-Type": "application/json"}'
+      #     data: '{"text":"Hello, World!"}'

@@ -1,0 +1,10 @@
+name: "## child ##"
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: echo hello world
+        run: echo "hello world"
