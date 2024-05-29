@@ -1,0 +1,51 @@
+name: "composite action"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch:
+
+inputs:
+  target:
+    description: "デプロイ対象（`develop`/`staging`/`production`）"
+    required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: echo hello world
+        run: "run test!"
+
+  deploy-development:
+    if: startsWith(inputs.target, 'develop')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: echo hello world
+        run: "run deploy-development!"
+
+  deploy-staging:
+    if: startsWith(inputs.target, 'staging')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: echo hello world
+        run: "run deploy-staging!"
+
+  deploy-production:
+    if: startsWith(inputs.target, 'production')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: echo hello world
+        run: "run deploy-production!"
