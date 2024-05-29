@@ -23,7 +23,7 @@ jobs:
           name: "## child ##"
           ref: ${{ github.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: "child.yml"
+          workflow: "./github/workflows/child.yml"
 
       # - name: Notify
       #   uses: fjogeleit/http-request-action@v1
