@@ -1,4 +1,6 @@
 name: "## child ##"
+on:
+  workflow_dispatch:
 jobs:
   confirm:
     runs-on: ubuntu-latest
