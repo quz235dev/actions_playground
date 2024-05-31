@@ -7,6 +7,8 @@ jobs:
   call_another_workflow:
     runs-on: ubuntu-latest
     steps:
+      - name: calling
+        run: echo "calling another workflow!"
       - name: Call the other workflow
         uses: ./.github/workflows/called-workflow.yml
         with:
