@@ -1,4 +1,4 @@
-name: call another workflow
+name: call slack test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
