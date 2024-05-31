@@ -16,7 +16,10 @@ jobs:
       - name: hello
         run: echo "hello!!!!"
       - name: github infos
-        run: echo ${{ github.ref }}
+        run: echo ${{ github.head_ref }} 
+        run: echo ${{ github.ref_name }} 
+        run: echo ${{ github.event.repository.name }}
+        run: echo ${{ github.sha }}
       - name: Send API Request
         run: |
           curl -X POST https://hooks.slack.com/triggers/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 \
