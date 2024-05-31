@@ -15,10 +15,13 @@ jobs:
     steps:
       - name: hello
         run: echo "hello!!!!"
-      - name: github infos
-        run: echo ${{ github.head_ref }} 
-        run: echo ${{ github.ref_name }} 
+      - name: github infos1
+        run: echo ${{ github.head_ref }}
+      - name: github infos2
+        run: echo ${{ github.ref_name }}
+      - name: github infos3
         run: echo ${{ github.event.repository.name }}
+      - name: github infos4
         run: echo ${{ github.sha }}
       - name: Send API Request
         run: |
