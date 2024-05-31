@@ -28,7 +28,7 @@ jobs:
           curl -X POST https://hooks.slack.com/triggers/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 \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.API_TOKEN }}" \
-            -d '{"eventTypeProduction ": "eventTypeProduction","eventTypeStaging ": "eventTypeStaging ","branch": "branch ","repository": "repository  ","commit": "commit  "}'
+            -d '{"eventTypeProduction ": "eventTypeProduction","eventTypeStaging ": "eventTypeStaging ","branch": ${{ github.head_ref || github.ref_name }},"repository": ${{ github.event.repository.name }},"commit": ${{ github.sha }}}'
 
 # jobs:
 #   send-api-request:
