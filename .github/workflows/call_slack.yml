@@ -1,7 +1,8 @@
-name: "composite action"
+name: call another workflow
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 on:
   workflow_dispatch:
 
@@ -11,15 +12,23 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    steps:
+      - run: echo "Hello World!"
+# jobs:
+#   send-api-request:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       id-token: write
 
-      steps:
-        - name: hello
-          run: echo "hello!!!!"
-        - name: github infos
-          run: echo ${{ github.ref }}
-        - name: Send API Request
-          run: |
-            curl -X POST https://hooks.slack.com/triggers/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 \
-              -H "Content-Type: application/json" \
-              -H "Authorization: Bearer ${{ secrets.API_TOKEN }}" \
-              -d '{"eventTypeProduction ": "eventTypeProduction","eventTypeStaging ": "eventTypeStaging ","branch": "branch ","repository": "repository  ","commit": "commit  "}'
+#       steps:
+#         - name: hello
+#           run: echo "hello!!!!"
+#         - name: github infos
+#           run: echo ${{ github.ref }}
+#         - name: Send API Request
+#           run: |
+#             curl -X POST https://hooks.slack.com/triggers/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 \
+#               -H "Content-Type: application/json" \
+#               -H "Authorization: Bearer ${{ secrets.API_TOKEN }}" \
+#               -d '{"eventTypeProduction ": "eventTypeProduction","eventTypeStaging ": "eventTypeStaging ","branch": "branch ","repository": "repository  ","commit": "commit  "}'
