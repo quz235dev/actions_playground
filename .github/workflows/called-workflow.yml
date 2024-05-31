@@ -7,12 +7,21 @@ on:
         description: "An example input"
         required: true
         type: string
+    secrets:
+      THIS_IS_SECRET:
+        description: Fill some secret string
+        required: true
+    outputs:
+      greeting_message:
+        description: Greeting message
+        value: ${{ jobs.greeting.outputs.message }}
 
 jobs:
-  example_job:
+  greeting:
     runs-on: ubuntu-latest
+    outputs:
+      message: ${{ steps.message.outputs.message }}
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Use the input
-        run: echo "The input was ${{ inputs.example_input }}"
+      - id: message
+        run: |
+          echo 'message=Hooray ${{ inputs.friend_name }}!' >> $GITHUB_OUTPUT
