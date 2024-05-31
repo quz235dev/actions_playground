@@ -1,0 +1,13 @@
+name: Calling Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call_another_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the other workflow
+        uses: ./.github/workflows/called-workflow.yml
+        with:
+          example_input: "Hello, World!"
