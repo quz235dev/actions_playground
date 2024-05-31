@@ -1,0 +1,12 @@
+name: "composite action"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch:
+
+runs:
+  using: "composite"
+  steps:
+    - name: hello
+      run: echo "hello!!!!"
