@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       message: ${{ steps.message.outputs.message }}
-    # if: inputs.target == 'development'
     steps:
       # ここに既存のデプロイスクリプトを記述
       - name: deploy
