@@ -4,12 +4,12 @@ on:
   workflow_call:
     inputs:
       target:
-        description: "deploy target"
+        description: target environment
         required: true
         type: string
     secrets:
       SECRET:
-        description: Fill some secret string
+        description: secret string
         required: true
     outputs:
       result:
@@ -22,7 +22,11 @@ jobs:
     outputs:
       message: ${{ steps.message.outputs.message }}
     steps:
+      if: inputs.target == 'development'
       # ここに既存のデプロイスクリプトを記述
+      - name: deploy
+        run: |
+          echo 'deploying to ${{ inputs.target }}...'
       - id: message
         run: |
           echo 'message=${{ inputs.target }}!' >> $GITHUB_OUTPUT
