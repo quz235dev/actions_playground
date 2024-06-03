@@ -25,6 +25,7 @@ jobs:
     steps:
       # ここに既存のデプロイスクリプトを記述
       - name: deploy
+        if: inputs.target == 'development'
         run: |
           echo 'deploying to ${{ inputs.target }}...'
       - id: message
