@@ -91,6 +91,9 @@ jobs:
       - call_deploy_ocr_request
       - call_deploy_ocr-result
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: show result
         run: |
