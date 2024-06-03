@@ -30,4 +30,4 @@ jobs:
           echo 'deploying to ${{ inputs.target }}...'
       - id: message
         run: |
-          echo 'message=${{ success() }}' >> $GITHUB_OUTPUT
+          echo 'message=${{ inputs.target }}' >> $GITHUB_OUTPUT
