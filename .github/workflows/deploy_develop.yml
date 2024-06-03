@@ -1,4 +1,4 @@
-name: call slack test
+name: deploy to develop
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  send-api-request:
+  sample:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,12 +25,12 @@ jobs:
     secrets:
       THIS_IS_SECRET: ${{ secrets.SECRET }}
 
-  show_outputs:
+  send_api_request:
     needs:
       - call_deploy_common
     runs-on: ubuntu-latest
     steps:
-      - show result
+      - name: show result
         run: |
           echo ${{ needs.call_deploy_common.outputs.result }}
 
