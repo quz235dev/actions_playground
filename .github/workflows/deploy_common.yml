@@ -22,6 +22,7 @@ jobs:
     outputs:
       message: ${{ steps.message.outputs.message }}
     steps:
+      # ここに既存のデプロイスクリプトを記述
       - id: message
         run: |
-          echo 'message=Hooray ${{ inputs.target }}!' >> $GITHUB_OUTPUT
+          echo 'message=${{ inputs.target }}!' >> $GITHUB_OUTPUT
