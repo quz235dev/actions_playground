@@ -23,7 +23,7 @@ jobs:
     with:
       target: develop
     secrets:
-      THIS_IS_SECRET: ${{ secrets.SECRET }}
+      SECRET: ${{ secrets.SECRET }}
 
   send_api_request:
     needs:
