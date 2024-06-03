@@ -1,4 +1,4 @@
-name: deploy
+name: deploy common
 
 on:
   workflow_call:
@@ -30,4 +30,4 @@ jobs:
           echo 'deploying to ${{ inputs.target }}...'
       - id: message
         run: |
-          echo 'message=${{ inputs.target }}!' >> $GITHUB_OUTPUT
+          echo 'message=${{ success() }}' >> $GITHUB_OUTPUT
