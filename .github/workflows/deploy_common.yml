@@ -1,0 +1,27 @@
+name: deploy
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: "deploy target"
+        required: true
+        type: string
+    secrets:
+      SECRET:
+        description: Fill some secret string
+        required: true
+    outputs:
+      result:
+        description: result message
+        value: ${{ jobs.deploy.outputs.message }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      message: ${{ steps.message.outputs.message }}
+    steps:
+      - id: message
+        run: |
+          echo 'message=Hooray ${{ inputs.target }}!' >> $GITHUB_OUTPUT

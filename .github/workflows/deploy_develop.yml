@@ -1,0 +1,42 @@
+name: call slack test
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-api-request:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: hello
+        run: echo "hello!!!!"
+      - name: github infos
+        run: echo ${{ github.head_ref }}
+
+  call_deploy_common:
+    uses: ./.github/workflows/deploy_common.yml
+    with:
+      target: develop
+    secrets:
+      THIS_IS_SECRET: ${{ secrets.SECRET }}
+
+  show_outputs:
+    needs:
+      - call_deploy_common
+    runs-on: ubuntu-latest
+    steps:
+      - show result
+        run: |
+          echo ${{ needs.call_deploy_common.outputs.result }}
+
+      - name: Send API Request
+        run: |
+          curl -X POST https://hooks.slack.com/triggers/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 \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.API_TOKEN }}" \
+            -d '{"eventTypeProduction ": "eventTypeProduction","eventTypeStaging ": "eventTypeStaging ","branch": "${{ github.head_ref || github.ref_name }}","repository": "${{ github.event.repository.name }}","commit": "${{ github.sha }}"}'
