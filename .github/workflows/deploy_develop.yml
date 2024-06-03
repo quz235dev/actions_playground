@@ -48,12 +48,48 @@ jobs:
     secrets:
       SECRET: ${{ secrets.SECRET }}
 
+  call_deploy_uploader: # uploader
+    needs:
+      - call_deploy_schema
+      - call_deploy_api
+      - call_deploy_frontend
+    uses: ./.github/workflows/deploy_common.yml
+    with:
+      target: development
+    secrets:
+      SECRET: ${{ secrets.SECRET }}
+
+  call_deploy_ocr_request: # ocr-request
+    needs:
+      - call_deploy_schema
+      - call_deploy_api
+      - call_deploy_frontend
+    uses: ./.github/workflows/deploy_common.yml
+    with:
+      target: development
+    secrets:
+      SECRET: ${{ secrets.SECRET }}
+
+  call_deploy_ocr-result: # ocr-result
+    needs:
+      - call_deploy_schema
+      - call_deploy_api
+      - call_deploy_frontend
+    uses: ./.github/workflows/deploy_common.yml
+    with:
+      target: development
+    secrets:
+      SECRET: ${{ secrets.SECRET }}
+
   send_api_request:
     needs:
       - call_deploy_schema
       - call_deploy_api
       - call_deploy_frontend
       - call_deploy_receiver
+      - call_deploy_uploader
+      - call_deploy_ocr_request
+      - call_deploy_ocr-result
     runs-on: ubuntu-latest
     steps:
       - name: show result
